@@ -1,6 +1,6 @@
 // data.js
 const Web3 = require('web3');
-const web3 = new Web3('https://eth-mainnet.g.alchemy.com/v2/W0euO4lKSsktbMBH3QVnxMR2Vkbh5qIm');
+const web3 = new Web3('https://eth-mainnet.g.alchemy.com/v2/api');
 
 async function fetchData() {
   try {
