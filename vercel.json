@@ -2,14 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/next"
+      "src": "dist/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/",
+      "destination": "/dist/index.html"
     }
   ],
   "redirects": [
@@ -28,6 +32,12 @@
           "value": "max-age=0, must-revalidate, private"
         }
       ]
+    }
+  ],
+  "map": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
   ],
   "cleanUrls": true,
