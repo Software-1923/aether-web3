@@ -17,7 +17,7 @@ const crypto = require('crypto');
 const THREE = require('three');
 const WebSocket = require('ws');
 
-require('dotenv').config({ path: './server.env' });
+require('dotenv').config({ path: './.env' });
 
 const PORT = process.env.PORT || 7050;
 const mongoDBUrl = process.env.MONGO_URI;
