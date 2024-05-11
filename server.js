@@ -9,15 +9,17 @@ const path = require('path');
 const fs = require('fs');
 const Web3 = require('web3');
 
-// Ethereum sağlayıcısının URL'sini güncelleyin
-const ethereumProviderUrl = 'https://mainnet.infura.io/v3/api';
-const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
-
 const crypto = require('crypto');
 const THREE = require('three');
 const WebSocket = require('ws');
 
 require('dotenv').config({ path: './.env' });
+
+const envConfig = dotenv.parsed;
+
+// Ethereum sağlayıcısının URL'sini güncelleyin
+const ethereumProviderUrl = envConfig.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
+const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
 const PORT = process.env.PORT || 7050;
 const mongoDBUrl = process.env.MONGO_URI;
