@@ -1,0 +1,14 @@
+# Bağımlılıklar
+/node_modules
+
+# Yapılandırma dosyaları
+/.env
+/.vscode
+
+# Derleme çıktıları
+/dist
+/tmp
+
+# OS üretilen dosyalar
+.DS_Store
+node_modules
