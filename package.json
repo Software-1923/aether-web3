@@ -99,7 +99,7 @@
     "hardhat": "^2.10.1"
   },
   "engines": {
-    "node": ">=20.13.1"
+    "node": ">=20.x"
   },
   "browserslist": [
     ">0.2%",
