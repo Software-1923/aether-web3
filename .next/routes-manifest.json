@@ -1,19 +1,40 @@
 {
-  "version": 3,
-  "pages404": true,
-  "basePath": "",
+  "version": 2,
   "routes": [
     {
-      "page": "/",
-      "regex": "^\\/?$"
+      "src": "/",
+      "dest": "/dist/index.html"
     },
     {
-      "page": "/about",
-      "regex": "^\\/about\\/?$"
+      "src": "/home",
+      "dest": "/dist/home.html"
     },
     {
-      "page": "/product/[id]",
-      "regex": "^\\/product\\/([^\\/]+?)\\/?$"
+      "src": "/404",
+      "dest": "/dist/404.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }
