@@ -20,7 +20,7 @@ require('dotenv').config();
 // Örneğin: process.env.VARIABLE_NAME
 
 // Ethereum sağlayıcısının URL'sini güncelleyin
-const ethereumProviderUrl = envConfig.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
+const ethereumProviderUrl = process.env.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
 const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
 const PORT = process.env.PORT || 7050;
