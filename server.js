@@ -16,19 +16,19 @@ const WebSocket = require('ws');
 // .env dosyasını yükleyin
 require('dotenv').config();
 
-// Çevre değişkenlerine process.env üzerinden erişim sağlayabilirsiniz
-// Örneğin: process.env.VARIABLE_NAME
-
 // Ethereum sağlayıcısının URL'sini güncelleyin
 const ethereumProviderUrl = process.env.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
 const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
+// Port ve MongoDB bağlantı bilgilerini .env dosyasından alın
 const PORT = process.env.PORT || 7050;
-const mongoDBUrl = process.env.MONGO_URI;
-const dbName = process.env.DB_NAME;
-const loadRemoteIndexUrl = process.env.MAIN_SERVER_LOAD_REMOTE_INDEX_URL;
+const mongoDBUrl = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
-mongoose.connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true, dbName });
+// MongoDB'ye bağlan
+mongoose.connect(mongoDBUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const clients = [];
 let apiKey = generateRandomString();
@@ -41,6 +41,7 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   next();
 });
+
 
 // CORS middleware ekleniyor
 app.use((req, res, next) => {
