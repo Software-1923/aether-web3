@@ -13,9 +13,11 @@ const crypto = require('crypto');
 const THREE = require('three');
 const WebSocket = require('ws');
 
-require('dotenv').config({ path: './.env' });
+// .env dosyasını yükleyin
+require('dotenv').config();
 
-const envConfig = dotenv.parsed;
+// Çevre değişkenlerine process.env üzerinden erişim sağlayabilirsiniz
+// Örneğin: process.env.VARIABLE_NAME
 
 // Ethereum sağlayıcısının URL'sini güncelleyin
 const ethereumProviderUrl = envConfig.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
