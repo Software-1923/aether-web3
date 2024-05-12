@@ -26,10 +26,19 @@ const mongoDBUrl = process.env.MONGO_URI;
 const dbName = process.env.DB_NAME;
 const loadRemoteIndexUrl = process.env.MAIN_SERVER_LOAD_REMOTE_INDEX_URL;
 
-mongoose.connect(mongoDBUrl, { useNewUrlParser: false, useUnifiedTopology: true, dbName });
+mongoose.connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true, dbName });
 
 const clients = [];
 let apiKey = generateRandomString();
+
+// HTTP başlıklarını ayarlayan middleware ekleniyor
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  next();
+});
 
 // CORS middleware ekleniyor
 app.use((req, res, next) => {
