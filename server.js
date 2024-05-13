@@ -22,7 +22,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
 // Port ve MongoDB bağlantı bilgilerini .env dosyasından alın
 const PORT = process.env.PORT || 7050;
-const mongoDBUrl = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+const mongoDBUrl = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_ID}.mongodb.net/${process.env.DB_NAME}`;
 
 // MongoDB'ye bağlan
 mongoose.connect(mongoDBUrl, {
