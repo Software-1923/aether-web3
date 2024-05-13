@@ -28,7 +28,9 @@ const mongoDBUrl = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${pr
 mongoose.connect(mongoDBUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+})
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 const clients = [];
 let apiKey = generateRandomString();
@@ -41,7 +43,6 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   next();
 });
-
 
 // CORS middleware ekleniyor
 app.use((req, res, next) => {
