@@ -1,17 +1,17 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "/",
-      "dest": "/dist/index.html"
+    "/": {
+      "file": "pages/index.js",
+      "dataRoute": "data"
     },
-    {
-      "src": "/home",
-      "dest": "/dist/home.html"
+    "/about": {
+      "file": "pages/about.js",
+      "dataRoute": "data"
     },
-    {
-      "src": "/404",
-      "dest": "/dist/404.html"
+    "/contact": {
+      "file": "pages/contact.js",
+      "dataRoute": "data"
     }
   ],
   "headers": [
