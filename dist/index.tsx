@@ -1,6 +1,17 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect } from 'react';
+import '../src/app/HomePage.css';
 
 const HomePage: React.FC = () => {
+  useEffect(() => {
+    const currentUrl = window.location.href;
+    if (currentUrl.endsWith('.html')) {
+      const newUrl = currentUrl.slice(0, -5);
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
+
   return (
     <div className="bg-gray-900 text-white flex justify-center items-center min-h-screen">
       <div className="container text-center">
@@ -21,19 +32,9 @@ const HomePage: React.FC = () => {
           <div id="assistant-shadow-root"></div>
         </div>
       </div>
-
-      <script>
-        {`
-          var currentUrl = window.location.href;
-
-          if (currentUrl.endsWith('.html')) {
-            var newUrl = currentUrl.slice(0, -5);
-            window.history.replaceState({}, document.title, newUrl);
-          }
-        `}
-      </script>
     </div>
   );
 };
 
 export default HomePage;
+
