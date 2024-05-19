@@ -1,17 +1,6 @@
-"use client";
-
-import React, { useEffect } from 'react';
-import '../src/app/HomePage.css';
+import React from 'react';
 
 const HomePage: React.FC = () => {
-  useEffect(() => {
-    const currentUrl = window.location.href;
-    if (currentUrl.endsWith('.html')) {
-      const newUrl = currentUrl.slice(0, -5);
-      window.history.replaceState({}, document.title, newUrl);
-    }
-  }, []);
-
   return (
     <div className="bg-gray-900 text-white flex justify-center items-center min-h-screen">
       <div className="container text-center">
@@ -25,16 +14,8 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div id="otherside-root" style={{ zIndex: 2147483647, position: 'relative' }}>
-        <div id="hyper-main-container">
-          <div id="hyper-menu-shadow-root"></div>
-          <div id="assistant-shadow-root"></div>
-        </div>
-      </div>
     </div>
   );
 };
 
 export default HomePage;
-

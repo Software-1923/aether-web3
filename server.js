@@ -13,20 +13,16 @@ const crypto = require('crypto');
 const THREE = require('three');
 const WebSocket = require('ws');
 
-// .env dosyasını yükleyin
 require('dotenv').config();
 
-// Ethereum sağlayıcısının URL'sini güncelleyin
 const ethereumProviderUrl = process.env.API_INFURA_URL || 'https://mainnet.infura.io/v3/api';
 const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
-// Port ve MongoDB bağlantı bilgilerini .env dosyasından alın
 const PORT = process.env.PORT || 7050;
 const mongoDBUrl = process.env.MONGO_URI;
 const dbName = process.env.DB_NAME;
 const loadRemoteIndexUrl = process.env.MAIN_SERVER_LOAD_REMOTE_INDEX_URL;
 
-// MongoDB'ye bağlan
 mongoose.connect(mongoDBUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -37,7 +33,6 @@ mongoose.connect(mongoDBUrl, {
 const clients = [];
 let apiKey = generateRandomString();
 
-// HTTP başlıklarını ayarlayan middleware ekleniyor
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -46,7 +41,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// CORS middleware ekleniyor
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -59,7 +53,6 @@ app.use((req, res, next) => {
   }
 });
 
-// Dist klasöründeki dosyaları servis et
 app.use('/get-file/:fileName', async (req, res) => {
   const fileName = req.params.fileName;
 
@@ -68,22 +61,19 @@ app.use('/get-file/:fileName', async (req, res) => {
   }
 
   try {
-      const fileContent = await fs.promises.readFile(path.join(__dirname, 'dist', fileName), 'utf8');
-      res.send(fileContent);
-    } catch (error) {
-      // Eğer dosya bulunamazsa, 404.html sayfasına yönlendir
-      res.redirect('/error-page/404.html');
-    }
-  });
+    const fileContent = await fs.promises.readFile(path.join(__dirname, 'dist', fileName), 'utf8');
+    res.send(fileContent);
+  } catch (error) {
+    res.redirect('/error-page/404.html');
+  }
+});
 
-// /load-remote-index endpoint'i eklendi
 app.get('/load-remote-index', async (req, res) => {
   try {
     const response = await axios.get(loadRemoteIndexUrl);
     res.set('Content-Type', response.headers['content-type']);
     res.send(response.data);
   } catch (error) {
-    // Eğer dosya bulunamazsa, 404.html sayfasına yönlendir
     res.redirect('/error-page/404.html');
   }
 });
@@ -96,11 +86,9 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
-  // Yönlendirme tanımlaması olmayan tüm istekler için 404.html sayfasına yönlendir
   res.redirect('/error-page/404.html');
 });
 
-// /web3-info endpoint'i eklendi
 app.get('/web3-info', async (req, res) => {
   try {
     const accounts = await web3.eth.getAccounts();
