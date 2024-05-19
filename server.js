@@ -1,4 +1,5 @@
 const express = require('express');
+const next = require('next');
 const expressWs = require('express-ws');
 const axios = require('axios');
 const mongoose = require('mongoose');
@@ -27,8 +28,27 @@ mongoose.connect(mongoDBUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Statik dosyaları ve API yollarını yönetme
+app.use(express.static('public'));
+app.use(express.json());
+
+// Express.js için özel yolları tanımlama
+app.get('/api/web3-info', async (req, res) => {
+  // Web3 ile ilgili işlemler burada yapılacak
+});
+
+// WebSocket bağlantıları için yol
+app.ws('/web3', (ws, req) => {
+  // WebSocket ile ilgili işlemler burada yapılacak
+});
+
+// Tüm diğer yolları Next.js handler'ına yönlendirme
+app.get('*', (req, res) => {
+  return handle(req, res);
+});
 
 const clients = [];
 let apiKey = generateRandomString();
