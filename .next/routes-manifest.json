@@ -2,7 +2,7 @@
   "version": 2,
   "routes": [
     "/": {
-      "file": "pages/index.js",
+      "file": "src/index.tsx",
       "dataRoute": "data"
     },
     "/about": {
