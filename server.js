@@ -2,7 +2,6 @@ const express = require('express');
 const next = require('next');
 const expressWs = require('express-ws');
 const axios = require('axios');
-const mongoose = require('mongoose');
 const app = express();
 expressWs(app);
 
@@ -20,16 +19,7 @@ const ethereumProviderUrl = process.env.API_INFURA_URL || 'https://mainnet.infur
 const web3 = new Web3(new Web3.providers.HttpProvider(ethereumProviderUrl));
 
 const PORT = process.env.PORT || 7050;
-const mongoDBUrl = process.env.MONGO_URI;
-const dbName = process.env.DB_NAME;
 const loadRemoteIndexUrl = process.env.MAIN_SERVER_LOAD_REMOTE_INDEX_URL;
-
-mongoose.connect(mongoDBUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
 
 // Statik dosyaları ve API yollarını yönetme
 app.use(express.static('public'));
