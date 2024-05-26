@@ -5,6 +5,7 @@ const config: Config = {
     "./dist/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./dist/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./dist/types/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     extend: {
