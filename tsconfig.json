@@ -17,7 +17,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false, // noEmit: true yerine noEmit: false yapalım
+    "noEmit": false,
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

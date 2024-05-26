@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* HomePage.css */
 .bg-gray-900 {
   background-color: #002327;

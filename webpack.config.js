@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -32,6 +33,17 @@ module.exports = {
         use: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader', // Add postcss-loader for Tailwind CSS
+        ],
+      },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin(), // Extract CSS into separate file
+  ],
 };
