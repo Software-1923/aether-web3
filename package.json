@@ -46,7 +46,7 @@
     "atlas": "^1.0.0-alpha.0",
     "atlas-app-services-admin-api": "^1.5.4",
     "atlas-fetch-data-api": "^1.0.5",
-    "axios": "^0.24.0",
+    "axios": "^0.28.0",
     "babel-loader": "^9.1.3",
     "browserify-fs": "^1.0.0",
     "bun": "^1.0.21",
